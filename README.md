@@ -1,4 +1,4 @@
-# strong-mermaid-petal
+# The Bikes and I
 
 ## Project setup
 ```
