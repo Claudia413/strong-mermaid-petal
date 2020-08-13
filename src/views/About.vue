@@ -30,7 +30,6 @@ export default {
   },
   created () {
     this.getContent();
-    console.log('hi', this.fields);
   }
 }
 </script>
