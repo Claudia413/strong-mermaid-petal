@@ -15,7 +15,7 @@
     "prismic-dom": "^2.2.3",
     "prismic-javascript": "^3.0.1",
     "prismic-vue": "^2.0.1",
-    "vue": "^2.6.11",
+    "vue": "^2.6.12",
     "vue-router": "^3.4.3",
     "vuex": "^3.5.1"
   },
@@ -32,7 +32,7 @@
     "node-sass": "^4.12.0",
     "prettier": "^2.0.5",
     "sass-loader": "^9.0.3",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.12"
   },
   "eslintConfig": {
     "root": true,
