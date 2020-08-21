@@ -1,23 +1,21 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from "vue";
+import Vuex from "vuex";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    blogpreviews: [],
+    blogpreviews: []
   },
   mutations: {
     SET_BLOGPREVIEWS(state, payload) {
-      state.blogpreviews = payload
+      state.blogpreviews = payload;
     }
   },
   actions: {
     setBlogPreviewsFromPrismic({ commit }, results) {
-        commit('SET_BLOGPREVIEWS', results)
-      },
+      commit("SET_BLOGPREVIEWS", results);
+    }
   },
-  getters: {
-
-  }
-})
+  getters: {}
+});
