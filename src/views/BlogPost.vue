@@ -9,7 +9,7 @@
 		<article>
 			<p class="publish-date">{{ blog.first_publication_date }}</p>
 			<h1 class="title">{{ blog.title[0].text }}</h1>
-			<section v-for="(slice, index) in slices" :key="'slice-' + index" class="dent-right">
+			<section v-for="(slice, index) in slices" :key="'slice-' + index" :class="slice.slice_type">
 				<template v-if="slice.slice_type === 'text1'">
 					<!-- <h2 class="heading">{{ slice.primary.section_title[0].text }}</h2> -->
 					<prismic-rich-text :field="slice.primary.text" class="text" />
@@ -22,7 +22,7 @@
 					<prismic-image :field="slice.primary.image" class="blog-image" />
 					<prismic-rich-text :field="slice.primary.image_description" class="caption" />
 				</template>
-				<template v-else-if="slice.slice_type === 'ride_stats'">
+				<template v-else-if="slice.slice_type === 'ride_stats'" class="ride-stats">
 					<span class="ride-stat">
 						<Bike class="ride-stat-icon" />
 						{{slice.primary.bike[0].text}}
@@ -36,12 +36,9 @@
 						{{slice.primary.total_km[0].text}} km
 					</span>
 					<span class="ride-stat">
-						<MapMarker class="ride-stat-icon" />
-						{{slice.primary.start_point}}
-					</span>
-					<span class="ride-stat">
-						<FlagCheckered class="ride-stat-icon" />
-						{{slice.primary.end_point}}
+						<FlagCheckered :h="24" class="ride-stat-icon" />
+						<a :href="slice.primary.strava_url[0].text" target="_blank" rel="nofollow" class="strava-link">
+						See on Strava</a>
 					</span>
 					<!-- <prismic-image :field="slice.primary.image" class="blog-image" />
 					<prismic-rich-text :field="slice.primary.image_description" class="caption" />-->
@@ -56,7 +53,6 @@ import moment from "moment";
 import Speedometer from "mdi-vue/Speedometer.vue";
 import Bike from "mdi-vue/Bike.vue";
 import MapMarkerDistance from "mdi-vue/MapMarkerDistance.vue";
-import MapMarker from "mdi-vue/MapMarker.vue";
 import FlagCheckered from "mdi-vue/FlagCheckered.vue";
 
 export default {
@@ -80,7 +76,6 @@ export default {
 		Speedometer,
 		Bike,
 		MapMarkerDistance,
-		MapMarker,
 		FlagCheckered
 	},
 	methods: {
@@ -158,13 +153,27 @@ article {
 	}
 }
 
+.ride_stats {
+	display: flex;
+	justify-content: space-between;
+	align-content: space-between;
+	margin: 64px 0;
+}
+
 .ride-stat {
 	margin: 8px;
+	display: flex;
+	align-items: center;
 	&:nth-child(1) {
 		margin: 8px 0;
 	}
 	.ride-stat-icon {
 		margin-right: 8px;
+		height: 24px;
+	}
+	.strava-link {
+		cursor: pointer;
+		color: unset;
 	}
 }
 </style>
