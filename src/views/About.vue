@@ -1,11 +1,11 @@
 <template>
   <div class="about">
     <div class="content">
-    <section class="text">
-      <h1>{{fields.title}}</h1>
-      <prismic-rich-text :field="fields.richContent"/>
-    </section>
-    <prismic-image :field="fields.photo" class="img"/>
+      <section class="text">
+        <h1>{{ fields.title }}</h1>
+        <prismic-rich-text :field="fields.richContent" />
+      </section>
+      <prismic-image :field="fields.photo" class="img" />
     </div>
   </div>
 </template>
@@ -30,8 +30,9 @@
   }
   @media only screen and (max-width: 768px) {
     grid-template-columns: 1fr;
-    grid-template-areas: "text"
-                          "img";
+    grid-template-areas:
+      "text"
+      "img";
   }
 }
 
@@ -58,7 +59,7 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       fields: {
         title: null,
@@ -68,17 +69,16 @@ export default {
     };
   },
   methods: {
-    getContent () {
-      this.$prismic.client.getSingle('about')
-        .then((document) => {
-          this.fields.title = document.data.title[0].text;
-          this.fields.richContent = document.data.content;
-          this.fields.photo = document.data.photo;
-        })
+    getContent() {
+      this.$prismic.client.getSingle("about").then(document => {
+        this.fields.title = document.data.title[0].text;
+        this.fields.richContent = document.data.content;
+        this.fields.photo = document.data.photo;
+      });
     }
   },
-  created () {
+  created() {
     this.getContent();
   }
-}
+};
 </script>

@@ -9,13 +9,9 @@
 </template>
 
 <script>
-import './assets/main.scss'
+import "./assets/main.scss";
 
-export default {
-
-}
+export default {};
 </script>
 
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>
