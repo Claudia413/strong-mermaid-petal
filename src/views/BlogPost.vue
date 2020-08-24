@@ -11,7 +11,6 @@
 			<h1 class="title">{{ blog.title[0].text }}</h1>
 			<section v-for="(slice, index) in slices" :key="'slice-' + index" :class="slice.slice_type">
 				<template v-if="slice.slice_type === 'text1'">
-					<!-- <h2 class="heading">{{ slice.primary.section_title[0].text }}</h2> -->
 					<prismic-rich-text :field="slice.primary.text" class="text" />
 				</template>
 				<template v-else-if="slice.slice_type === 'picture'">
@@ -37,11 +36,9 @@
 					</span>
 					<span class="ride-stat">
 						<FlagCheckered :h="24" class="ride-stat-icon" />
-						<a :href="slice.primary.strava_url[0].text" target="_blank" rel="nofollow" class="strava-link">
+						<a :href="slice.primary.strava_url[0].text" target="_blank" rel="noopener" class="strava-link">
 						See on Strava</a>
 					</span>
-					<!-- <prismic-image :field="slice.primary.image" class="blog-image" />
-					<prismic-rich-text :field="slice.primary.image_description" class="caption" />-->
 				</template>
 			</section>
 		</article>
@@ -81,7 +78,6 @@ export default {
 	methods: {
 		getContent(uid) {
 			this.$prismic.client.getByUID("blogpost", uid).then(document => {
-				console.log("document", document);
 				// Can't simply put the result in an empty blog object without console erros about undefined before its done loading. So we set them individually with starting empty objects and arrays
 				this.blog.title = document.data.blog_title;
 				this.blog.first_publication_date = moment(
