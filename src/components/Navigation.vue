@@ -3,7 +3,7 @@
     <router-link to="/" class="logo-section">
       <img src="../assets/Logo3.png" alt="the Bikes & I" class="logo" />
     </router-link>
-    <nav>
+    <nav class="nav-links">
       <router-link to="/about" class="nav-link">About</router-link>
       <router-link to="/experiences" class="nav-link">Experiences</router-link>
       <router-link to="/reviews" class="nav-link">Reviews</router-link>
@@ -19,6 +19,12 @@
         <YouTube :size="18" class="icon" />
       </a>
     </div>
+    <div class="nav-icon" @click="toggleMenu()" :class="showMenu? 'open' : ''">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </div>
 </template>
 
@@ -28,10 +34,20 @@ import YouTube from "mdi-vue/Youtube.vue";
 
 export default {
   name: "Navigation",
+  data() {
+    return {
+      showMenu: false
+    };
+  },
   components: {
       Instagram,
       YouTube
+    },
+  methods: {
+    toggleMenu() {
+      this.showMenu = !this.showMenu
     }
+  }
 }
 </script>
 
@@ -76,6 +92,11 @@ nav {
       color:rgba(0, 0, 0, 0.35);
     }
 }
+.nav-links {
+  @media only screen and (max-width: 768px) {
+    display: none;
+	}
+}
 
 .social {
   color: rgba(0,0,0,1);
@@ -99,5 +120,84 @@ nav {
     color: rgba(0, 0, 0, 1);
     transition: all 0.3s ease-in-out;
   }
+  @media only screen and (max-width: 768px) {
+		display: none;
+	}
+}
+
+.nav-icon{
+  width: 36px;
+  height: 18px;
+  position: relative;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: .5s ease-in-out;
+  -moz-transition: .5s ease-in-out;
+  -o-transition: .5s ease-in-out;
+  transition: .5s ease-in-out;
+  cursor: pointer;
+  display: none;
+   @media only screen and (max-width: 768px) {
+		display: block;
+	}
+}
+
+.nav-icon span {
+  display: block;
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  background: #000000;
+  border-radius: 9px;
+  opacity: 1;
+  left: 0;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: .25s ease-in-out;
+  -moz-transition: .25s ease-in-out;
+  -o-transition: .25s ease-in-out;
+  transition: .25s ease-in-out;
+}
+
+.nav-icon span:nth-child(1) {
+  top: 0px;
+}
+
+.nav-icon span:nth-child(2),.nav-icon span:nth-child(3) {
+  top: 9px;
+}
+
+.nav-icon span:nth-child(4) {
+  top: 18px;
+}
+
+.nav-icon.open span:nth-child(1) {
+  top: 9px;
+  width: 0%;
+  left: 50%;
+}
+
+.nav-icon.open span:nth-child(2) {
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.nav-icon.open span:nth-child(3) {
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+.nav-icon.open span:nth-child(4) {
+  top: 12px;
+  width: 0%;
+  left: 50%;
 }
 </style>
