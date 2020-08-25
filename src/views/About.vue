@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <main class="about">
     <div class="content">
       <section class="text">
         <h1>{{ fields.title }}</h1>
@@ -7,7 +7,7 @@
       </section>
       <prismic-image :field="fields.photo" class="img" />
     </div>
-  </div>
+  </main>
 </template>
 
 <script>
@@ -44,7 +44,7 @@ export default {
   background-color: #fcfcfc;
 }
 .content {
-  max-width: 1600px;
+  max-width: 1200px;
   padding: 80px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -67,6 +67,7 @@ export default {
   max-width: 100%;
   font-size: 18px;
   padding: 20px;
+  padding-left: 0;
   h1 {
     margin-top: 64px;
     margin-bottom: 24px;
