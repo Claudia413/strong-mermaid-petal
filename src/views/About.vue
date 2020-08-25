@@ -62,9 +62,9 @@ export default {
   data() {
     return {
       fields: {
-        title: null,
-        richContent: null,
-        photo: null
+        title: "",
+        richContent: [],
+        photo: {}
       }
     };
   },
