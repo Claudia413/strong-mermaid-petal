@@ -10,6 +10,32 @@
   </div>
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      fields: {
+        title: "",
+        richContent: [],
+        photo: {}
+      }
+    };
+  },
+  methods: {
+    getContent() {
+      this.$prismic.client.getSingle("about").then(document => {
+        this.fields.title = document.data.title[0].text;
+        this.fields.richContent = document.data.content;
+        this.fields.photo = document.data.photo;
+      });
+    }
+  },
+  created() {
+    this.getContent();
+  }
+};
+</script>
+
 <style lang="scss" scoped>
 .about {
   display: flex;
@@ -56,29 +82,3 @@
   }
 }
 </style>
-
-<script>
-export default {
-  data() {
-    return {
-      fields: {
-        title: "",
-        richContent: [],
-        photo: {}
-      }
-    };
-  },
-  methods: {
-    getContent() {
-      this.$prismic.client.getSingle("about").then(document => {
-        this.fields.title = document.data.title[0].text;
-        this.fields.richContent = document.data.content;
-        this.fields.photo = document.data.photo;
-      });
-    }
-  },
-  created() {
-    this.getContent();
-  }
-};
-</script>
