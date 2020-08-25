@@ -1,5 +1,5 @@
 <template>
-  <footer class="">
+  <footer>
     <a href="https://www.instagram.com/the_bikes_and_i/" rel="noopener">
       <Instagram :size="18" class="icon" />
     </a>
@@ -39,7 +39,7 @@ export default {
     .icon {
       margin: 4px;
       color: rgba(0, 0, 0, 1);
-      transition: all, 4s, ease-in-out;
+      transition: all 0.25s ease-in-out;
     }
   }
 </style>
