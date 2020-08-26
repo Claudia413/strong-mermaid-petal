@@ -1,4 +1,6 @@
 <template>
+<div>
+  <Navigation/>
   <main class="about">
     <div class="content">
       <section class="text">
@@ -8,9 +10,12 @@
       <prismic-image :field="fields.photo" class="img" />
     </div>
   </main>
+</div>
 </template>
 
 <script>
+import Navigation from '@/components/Navigation.vue';
+
 export default {
   data() {
     return {
@@ -20,6 +25,9 @@ export default {
         photo: {}
       }
     };
+  },
+  components: {
+    Navigation
   },
   methods: {
     getContent() {

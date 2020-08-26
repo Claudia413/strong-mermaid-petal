@@ -1,13 +1,18 @@
 <template>
   <div class="home">
+    <Navigation />
     <p>{{ $store.state.blogpreviews }}</p>
   </div>
 </template>
 
 <script>
+import Navigation from '@/components/Navigation.vue'
+
 export default {
   name: "Home",
-  components: {},
+  components: {
+    Navigation
+  },
   data() {
     return {};
   },

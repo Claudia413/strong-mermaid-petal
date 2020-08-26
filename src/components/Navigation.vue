@@ -3,7 +3,7 @@
     <router-link to="/" class="logo-section">
       <img src="../assets/Logo3.png" alt="the Bikes & I" class="logo" />
     </router-link>
-    <nav class="nav-links">
+    <nav class="nav-links" :class="showMenu? 'show' : '' ">
       <router-link to="/about" class="nav-link">About</router-link>
       <router-link to="/experiences" class="nav-link">Experiences</router-link>
       <router-link to="/reviews" class="nav-link">Reviews</router-link>
@@ -19,7 +19,7 @@
         <YouTube :size="18" class="icon" />
       </a>
     </div>
-    <div class="nav-icon" @click="toggleMenu()" :class="showMenu? 'open' : ''">
+    <div class="nav-icon" @click="toggleMenu()" :class="showMenu? 'open' : ''" title="toggle mobile menu">
       <span></span>
       <span></span>
       <span></span>
@@ -47,30 +47,56 @@ export default {
     toggleMenu() {
       this.showMenu = !this.showMenu
     }
-  }
+  },
+  beforeRouteUpdate (to, from, next) {
+		this.showMenu = false;
+		next();
+	}
 }
 </script>
 
 <style scoped lang="scss">
 .navbar {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 3fr auto;
+  grid-template-areas: "logo links social";
   justify-content: flex-end;
   align-items: center;
   max-width: 1200px;
-  margin: 24px auto;
-  padding: 0 80px;
+  margin: 0 auto;
+  padding: 24px 80px;
+  background-color: #fcfcfc;
+  @media only screen and (max-width: 768px) {
+    grid-template-columns: 3fr auto;
+    grid-template-rows: auto auto;
+    grid-template-areas: "logo toggle"
+                         "links links";
+    position: sticky;
+    top: 0;
+    background-color: white;
+    padding: 4px 80px;
+  }
 }
 
 .logo-section {
+  grid-area: logo;
   margin-right: auto;
+  @media only screen and (max-width: 768px) {
+    margin-right: unset;
+    text-align: center;
+  }
 }
 
 .logo {
   width: 80px;
   height: auto;
+  @media only screen and (max-width: 768px) {
+    width: 72px;
+  }
 }
 
 nav {
+  grid-area: links;
   font-family: "Josefin Sans",
      Arial,
      sans-serif;
@@ -89,16 +115,31 @@ nav {
     transition: all 0.3s ease-out;
   }
   a:hover {
-      color:rgba(0, 0, 0, 0.35);
-    }
-}
-.nav-links {
+    color:rgba(0, 0, 0, 0.35);
+  }
   @media only screen and (max-width: 768px) {
-    display: none;
-	}
+    flex-direction: column;
+    background-color: white;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: -100%;
+    right: 0;
+    transition: left, 0.4s ease-in-out;
+    padding: 36px;
+    box-sizing: border-box;
+    &.show {
+      left: 0;
+    }
+    a {
+    margin: 12px;
+    }
+  }
 }
 
 .social {
+  grid-area: social;
   color: rgba(0,0,0,1);
   margin-left: 24px;
   // Padding bottom to get the svgs to vertically align with the rest of navbar
@@ -126,6 +167,7 @@ nav {
 }
 
 .nav-icon{
+  grid-area: toggle;
   width: 36px;
   height: 18px;
   position: relative;

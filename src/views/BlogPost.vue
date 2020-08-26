@@ -1,4 +1,6 @@
 <template>
+<div>
+	<Navigation />
 	<div class="blog">
 		<!-- <vue-headful
 			:title="blog.seo_title"
@@ -43,6 +45,7 @@
 			</section>
 		</article>
 	</div>
+</div>
 </template>
 
 <script>
@@ -51,6 +54,7 @@ import Speedometer from "mdi-vue/Speedometer.vue";
 import Bike from "mdi-vue/Bike.vue";
 import MapMarkerDistance from "mdi-vue/MapMarkerDistance.vue";
 import FlagCheckered from "mdi-vue/FlagCheckered.vue";
+import Navigation from "@/components/Navigation.vue";
 
 export default {
 	name: "blogPost",
@@ -73,7 +77,8 @@ export default {
 		Speedometer,
 		Bike,
 		MapMarkerDistance,
-		FlagCheckered
+		FlagCheckered,
+		Navigation
 	},
 	methods: {
 		getContent(uid) {
