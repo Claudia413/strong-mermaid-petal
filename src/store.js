@@ -5,16 +5,37 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    blogpreviews: []
+    blogpreviewslatest: [],
+    blogpreviewsexperiences: [],
+    blogpreviewsreviews: [],
+    blogpreviewshacks: [],
+    blogpreviewsmaintenance: [],
+    blogpreviewstools: []
   },
   mutations: {
-    SET_BLOGPREVIEWS(state, payload) {
-      state.blogpreviews = payload;
-    }
+    SET_BLOGPREVIEWSLATEST(state, payload) {
+      state.blogpreviewslatest = payload;
+    },
+    SET_BLOGPREVIEWS_EXPERIENCES(state, payload) {
+      state.blogpreviewsexperiences = payload;
+    },
+    SET_BLOGPREVIEWS_REVIEWS(state, payload) {
+      state.blogpreviewsreviews = payload;
+    },
+    SET_BLOGPREVIEWS_HACKS(state, payload) {
+      state.blogpreviewshacks = payload;
+    },
+    SET_BLOGPREVIEWS_MAINTENANCE(state, payload) {
+      state.blogpreviewsmaintenance = payload;
+    },
+    SET_BLOGPREVIEWS_TOOLS(state, payload) {
+      state.blogpreviewstools = payload;
+    },
   },
   actions: {
     setBlogPreviewsFromPrismic({ commit }, results) {
-      commit("SET_BLOGPREVIEWS", results);
+      var tag=results[0].tags[0].toUpperCase();
+      commit("SET_BLOGPREVIEWS_" + tag, results);
     }
   },
   getters: {}

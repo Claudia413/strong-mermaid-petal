@@ -5,11 +5,11 @@
     </router-link>
     <nav class="nav-links" :class="showMenu? 'show' : '' ">
       <router-link to="/about" class="nav-link">About</router-link>
-      <router-link to="/experiences" class="nav-link">Experiences</router-link>
-      <router-link to="/reviews" class="nav-link">Reviews</router-link>
-      <router-link to="/hacks" class="nav-link">Hacks</router-link>
-      <router-link to="/maintenance" class="nav-link">Maintenance</router-link>
-      <router-link to="/tools" class="nav-link">Tools</router-link>
+      <router-link to="/category/experiences" class="nav-link">Experiences</router-link>
+      <router-link to="/category/reviews" class="nav-link">Reviews</router-link>
+      <router-link to="/category/hacks" class="nav-link">Hacks</router-link>
+      <router-link to="/category/maintenance" class="nav-link">Maintenance</router-link>
+      <router-link to="/category/tools" class="nav-link">Tools</router-link>
     </nav>
     <div class="social">
       <a href="https://www.instagram.com/the_bikes_and_i/" rel="noopener">

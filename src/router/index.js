@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Home from "../views/Home.vue";
 import About from "../views/About.vue";
 import BlogPost from "../views/BlogPost.vue";
+import Overview from "../views/Overview.vue";
 
 Vue.use(Router);
 
@@ -24,11 +25,11 @@ export default new Router({
       name: "blog-post",
       component: BlogPost
     },
-    // {
-    //   path: '/:tagid',
-    //   name: 'blog-category',
-    //   component: Overview,
-    // },
+    {
+      path: '/category/:tagid',
+      name: 'blog-category',
+      component: Overview,
+    },
     {
       path: "*",
       name: "everything",
