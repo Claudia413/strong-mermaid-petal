@@ -144,6 +144,12 @@ article {
 	object-fit: cover;
 }
 
+.text {
+	ul, ol {
+		font-size: 16px;
+	}
+}
+
 .blog-image-caption {
 	font-size: 12px;
 	line-height: 20px;
