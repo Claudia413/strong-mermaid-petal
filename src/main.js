@@ -4,6 +4,7 @@ import router from "./router";
 import store from "./store";
 import PrismicVue from "@prismicio/vue";
 import linkResolver from "./link-resolver";
+import {VueMasonryPlugin} from 'vue-masonry';
 
 Vue.config.productionTip = false;
 
@@ -16,6 +17,8 @@ Vue.use(PrismicVue, {
     accessToken
   }
 });
+
+Vue.use(VueMasonryPlugin)
 
 Vue.filter('capitalize', function (value) {
   if (!value) return ''
