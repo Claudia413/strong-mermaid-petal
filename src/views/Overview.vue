@@ -37,7 +37,6 @@ export default {
 	},
 	methods: {
 		getContent(category, pageNumber) {
-            console.log('inside getContent');
 			this.$prismic.client
 				.query(
 					[
@@ -71,7 +70,6 @@ export default {
         this.getContent(this.$route.params.tagid, this.pageNumber);
 	},
 	beforeRouteUpdate(to, from, next) {
-        console.log('params', to.params.tagid)
 		//   This prevents blog page not updating upon route change
         this.getContent(to.params.tagid, 1);
 		next();
