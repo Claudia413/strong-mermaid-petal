@@ -1,4 +1,5 @@
 import Vue from "vue";
+import store from "../store";
 import Router from "vue-router";
 import Home from "../views/Home.vue";
 import About from "../views/About.vue";
@@ -7,7 +8,7 @@ import Overview from "../views/Overview.vue";
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: "history",
   routes: [
     {
@@ -47,3 +48,10 @@ export default new Router({
     }
   }
 });
+
+router.beforeEach((to, from, next) => {
+  store.state.showMobileMenu = false;
+  next()
+})
+
+export default router

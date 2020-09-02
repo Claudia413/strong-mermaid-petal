@@ -9,8 +9,9 @@
 			:url="'/category/' + blog.tag"
 			/>-->
             <h2>Posts in {{blog.tag | capitalize}}</h2>
-            <div class="blogs">
-                <div v-for="(post, index) in blogpreviews" :key="'post-' + index" :blogId="post.uid" class="blog" >
+
+            <div v-masonry gutter="24" class="blogs">
+                <div v-masonry-tile transition-duration="0.3s" item-selector=".blog" column-width="30%" fit-width="true" v-for="(post, index) in blogpreviews" :key="'post-' + index" :blogId="post.uid" class="blog">
                     <router-link :to="'/blog/' + post.uid"><prismic-image :field="post.data.cover_image" class="cover-image" /></router-link>
                     <p class="publish-date">{{ readableDate(post.first_publication_date) }} </p>
                     <h3 class="title">
@@ -103,7 +104,7 @@ export default {
             next();
         }
 
-	},
+    }
 };
 </script>
 
@@ -135,6 +136,7 @@ h2 {
     flex-direction: column;
     max-width: 30%;
     justify-content: flex-start;
+    margin: 12px 0;
     @media only screen and (max-width: 768px) {
 		max-width: 45%;
     }

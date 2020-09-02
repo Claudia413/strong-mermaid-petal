@@ -5,6 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    showMobileMenu: false,
     blogpreviewslatest: [],
     blogpreviewsexperiences: [],
     blogpreviewsreviews: [],
@@ -13,6 +14,9 @@ export default new Vuex.Store({
     blogpreviewstools: []
   },
   mutations: {
+    TOGGLE_SHOW_MOBILE_MENU(state, payload) {
+      state.showMobileMenu = payload
+    },
     SET_BLOGPREVIEWSLATEST(state, payload) {
       state.blogpreviewslatest = payload;
     },
@@ -40,6 +44,14 @@ export default new Vuex.Store({
       } else {
         console.log('there are no results for this category')
       }
+    },
+    toggleShowMobileMenu({commit}, setting) {
+      if (setting) {
+        commit("TOGGLE_SHOW_MOBILE_MENU", setting);
+      } else {
+        commit("TOGGLE_SHOW_MOBILE_MENU", !this.state.showMobileMenu);
+      }
+
     }
   },
   getters: {}

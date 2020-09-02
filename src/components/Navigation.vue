@@ -12,14 +12,14 @@
       <router-link to="/category/tools" class="nav-link">Tools</router-link>
     </nav>
     <div class="social">
-      <a href="https://www.instagram.com/the_bikes_and_i/" rel="noopener">
+      <a href="https://www.instagram.com/the_bikes_and_i/" rel="noopener" target="_blank">
         <Instagram :size="18" class="icon" />
       </a>
-      <a href="https://www.youtube.com/channel/UCfWT24ZhU7KIr0CevzibZLQ" rel="noopener">
+      <a href="https://www.youtube.com/channel/UCfWT24ZhU7KIr0CevzibZLQ" rel="noopener" target="_blank">
         <YouTube :size="18" class="icon" />
       </a>
     </div>
-    <div class="nav-icon" @click="toggleMenu()" :class="showMenu? 'open' : ''" title="toggle mobile menu">
+    <div class="nav-icon" @click="toggleShowMobileMenu()" :class="showMenu? 'open' : ''" title="toggle mobile menu">
       <span></span>
       <span></span>
       <span></span>
@@ -31,12 +31,13 @@
 <script>
 import Instagram from "mdi-vue/Instagram.vue";
 import YouTube from "mdi-vue/Youtube.vue";
+import { mapActions } from 'vuex'
 
 export default {
   name: "Navigation",
   data() {
     return {
-      showMenu: false
+
     };
   },
   components: {
@@ -44,14 +45,14 @@ export default {
       YouTube
     },
   methods: {
-    toggleMenu() {
-      this.showMenu = !this.showMenu
-    }
+     ...mapActions([
+      'toggleShowMobileMenu'])
   },
-  beforeRouteUpdate (to, from, next) {
-		this.showMenu = false;
-		next();
-	}
+  computed: {
+    showMenu () {
+      return this.$store.state.showMobileMenu;
+    }
+  }
 }
 </script>
 
@@ -66,6 +67,7 @@ export default {
   margin: 0 auto;
   padding: 24px 80px;
   background-color: #fcfcfc;
+  z-index: 9000;
   @media only screen and (max-width: 768px) {
     grid-template-columns: 3fr auto;
     grid-template-rows: auto auto;
