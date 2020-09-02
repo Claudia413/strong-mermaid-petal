@@ -60,7 +60,7 @@ export default {
 					],
 					{
 						orderings: "[document.first_publication_date desc]",
-						pageSize: 10,
+						pageSize: 100,
 						page: pageNumber,
 						fetch: ["blogpost.blog_title", "blogpost.teaser", "blogpost.cover_image"],
 					}
