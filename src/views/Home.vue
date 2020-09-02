@@ -9,19 +9,21 @@
 					<prismic-image :field="slice.primary.photo" class="parallax" />
 				</template>
         <template v-else-if="slice.slice_type === 'posts_per_category'">
-					<h2>{{slice.primary.category | capitalize }}</h2>
-          <div v-for="(post, index) in previews[slice.primary.category]" :key="'post-' + index" :class="post">
-            <prismic-image :field="post.data.cover_image" class="post-img" />
-            <h3 class="title">
-              <router-link :to="'/blog/' + post.uid">
-                  {{ post.data.blog_title[0].text}}
-              </router-link>
-            </h3>
-            <p class="teaser">
-                <prismic-rich-text :field="post.data.teaser" />
-            </p>
-            <p class="publish-date">{{ readableDate(post.first_publication_date) }} </p>
-          </div>
+            <h2>{{slice.primary.category | capitalize }}</h2>
+            <div class="post-slider">
+              <div v-for="(post, index) in previews[slice.primary.category]" :key="'post-' + index" class="post">
+                <prismic-image :field="post.data.cover_image" class="post-img" />
+                <h3 class="title">
+                  <router-link :to="'/blog/' + post.uid">
+                      {{ post.data.blog_title[0].text}}
+                  </router-link>
+                </h3>
+                <p class="teaser">
+                    <prismic-rich-text :field="post.data.teaser" />
+                </p>
+                <p class="publish-date">{{ readableDate(post.first_publication_date) }} </p>
+              </div>
+            </div>
 				</template>
     </section>
   </div>
@@ -103,6 +105,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.most_recent_posts, .posts_per_category {
+  max-width: 1200px;
+  margin: auto;
+}
+
 .parallax {
   width: 100%;
   height: 50px;
@@ -110,8 +117,16 @@ export default {
 }
 
 .post-img {
- width: 40px;
- height: auto;
+ width: 100%;
+ max-height: 240px;
+ object-fit: cover;
 }
 
+.post-slider {
+  display: flex;
+  flex-direction: row;
+  .post {
+    width: 30%;
+  }
+}
 </style>
