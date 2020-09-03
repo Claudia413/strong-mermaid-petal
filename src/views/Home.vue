@@ -2,16 +2,17 @@
   <div class="home">
     <Navigation />
     <section v-for="(slice, index) in slices" :key="'slice-' + index" :class="slice.slice_type">
+
       <template v-if="slice.slice_type === 'most_recent_posts'">
         <div class="recent-reel">
           <div v-for="(post, index) in latestBlogs" :key="'post-' + index" class="post">
               <router-link :to="'/blog/' + post.uid"><prismic-image :field="post.data.cover_image" class="post-img" /></router-link>
+              <p class="publish-date">{{ readableDate(post.first_publication_date) }} </p>
               <h3 class="title">
                 <router-link :to="'/blog/' + post.uid">
                     {{ post.data.blog_title[0].text}}
                 </router-link>
               </h3>
-              <p class="publish-date">{{ readableDate(post.first_publication_date) }} </p>
             </div>
         </div>
 				</template>
@@ -178,6 +179,12 @@ export default {
 .recent-reel {
   display: flex;
   justify-content: space-between;
+  h3 {
+    font-size: 14px;
+  }
+  .publish-date {
+    margin: 0;
+  }
   .post {
     width: 20%;
     min-width: unset;
