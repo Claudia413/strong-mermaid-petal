@@ -2,12 +2,12 @@
 <div>
 	<Navigation />
 	<div class="blog">
-		<!-- <vue-headful
+		<vue-headful
 			:title="blog.seo_title"
 			:description="blog.seo_description"
 			:image="blog.seo_image"
 			:url="'/blog' + blog.uid"
-		/>-->
+		/>
 		<article>
 			<p class="publish-date">{{ blog.first_publication_date }}</p>
 			<h1 class="title">{{ blog.title[0].text }}</h1>
@@ -65,10 +65,10 @@ export default {
 				labels: [],
 				prismicID: "",
 				uid: "",
-				first_publication_date: ""
-				// seo_title: "",
-				// seo_description: "",
-				// seo_image: ""
+				first_publication_date: "",
+				seo_title: "",
+				seo_description: "",
+				seo_image: ""
 			},
 			slices: []
 		};
@@ -89,9 +89,9 @@ export default {
 					document.first_publication_date
 				).format("MMMM Do YYYY");
 				this.blog.labels = document.tags;
-				// this.blog.seo_title = document.data.seo_title[0].text;
-				// this.blog.seo_description = document.data.seo_description[0].text;
-				// this.blog.seo_image = document.data.seo_image.url;
+				this.blog.seo_title = document.data.seo_title[0].text;
+				this.blog.seo_description = document.data.seo_description[0].text;
+				this.blog.seo_image = document.data.seo_image.url;
 				this.slices = document.data.body;
 				this.blog.prismicID = document.id;
 			});

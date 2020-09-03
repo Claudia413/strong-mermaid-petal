@@ -2,12 +2,6 @@
 	<div>
 		<Navigation />
 		<main class="overview">
-			<!-- <vue-headful
-			:title="blog.seo_title"
-			:description="blog.seo_description"
-			:image="blog.seo_image"
-			:url="'/category/' + blog.tag"
-			/>-->
             <h2>Posts in {{blog.tag | capitalize}}</h2>
 
             <div v-masonry gutter="24" class="blogs">
