@@ -3,11 +3,25 @@
     <Navigation />
     <section v-for="(slice, index) in slices" :key="'slice-' + index" :class="slice.slice_type">
       <template v-if="slice.slice_type === 'most_recent_posts'">
-					<p>most recent posts go here</p>
+        <div class="recent-reel">
+          <div v-for="(post, index) in latestBlogs" :key="'post-' + index" class="post">
+              <router-link :to="'/blog/' + post.uid"><prismic-image :field="post.data.cover_image" class="post-img" /></router-link>
+              <h3 class="title">
+                <router-link :to="'/blog/' + post.uid">
+                    {{ post.data.blog_title[0].text}}
+                </router-link>
+              </h3>
+              <p class="publish-date">{{ readableDate(post.first_publication_date) }} </p>
+            </div>
+        </div>
 				</template>
+
 				<template v-else-if="slice.slice_type === 'parallax'">
-					<prismic-image :field="slice.primary.photo" class="parallax" />
+          <Parallax :sectionClass="parallax" :parallax="true" :speedFactor="0.35" breakpoint='(min-width: 250px)' :sectionHeight="40">
+					  <prismic-image :field="slice.primary.photo" />
+          </Parallax>
 				</template>
+
         <template v-else-if="slice.slice_type === 'posts_per_category'">
             <BlogSlider :numberOfSlides="2" :title="slice.primary.category | capitalize" :showArrows="previews[slice.primary.category].length > 2">
               <template v-slot:slide1>
@@ -39,9 +53,8 @@
                 </div>
               </template>
             </BlogSlider>
-
-
 				</template>
+
     </section>
   </div>
 </template>
@@ -51,17 +64,20 @@ import Navigation from '@/components/Navigation.vue'
 import BlogSlider from '@/components/BlogSlider.vue'
 import moment from 'moment';
 import ArrowRight from "mdi-vue/ArrowRight.vue";
+import Parallax from 'vue-parallaxy'
 
 export default {
   name: "Home",
   components: {
     Navigation,
     BlogSlider,
-    ArrowRight
+    ArrowRight,
+    Parallax,
   },
   data() {
     return {
       slices: [],
+      latestBlogs: {},
       previews: {
         reviews: [],
         experiences: [],
@@ -77,13 +93,12 @@ export default {
         this.slices = document.data.body;
         var that = this
         this.slices.forEach( function (slice) {
-          console.log('slicetypes', slice);
           // for each category slice we'll need to get the content per category
           if (slice.slice_type === 'posts_per_category') {
             that.getCategoryContent(slice.primary.category)
           } else if (slice.slice_type === 'most_recent_posts') {
 
-
+            that.getMostRecentContent()
             console.log('hi, still need to do something here')
           // add function to get most recent posts
 
@@ -114,6 +129,21 @@ export default {
 					// response is the response object, response.results holds the documents
       });
     },
+    getMostRecentContent() {
+
+			this.$prismic.client.query([
+			this.$prismic.Predicates.at('document.type', 'blogpost'),
+			this.$prismic.Predicates.not('document.tags', ['TEST']),
+			],
+			{
+			orderings : '[document.first_publication_date desc]',
+			pageSize : 4,
+			fetch : ['blogpost.blog_title', 'blogpost.cover_image'] }
+			).then((response) => {
+				this.latestBlogs = response.results
+			// response is the response object, response.results holds the documents
+			});
+    },
     readableDate(date) {
           return moment(date).format("MMMM Do, YYYY")
     },
@@ -138,10 +168,32 @@ export default {
 <style lang="scss" scoped>
 .most_recent_posts, .posts_per_category {
   max-width: 1200px;
-  margin: auto;
+  margin: 40px auto;
   padding: 0 80px;
   @media only screen and (max-width: 768px) {
 		padding: 0 40px;
+  }
+}
+
+.recent-reel {
+  display: flex;
+  justify-content: space-between;
+  .post {
+    width: 20%;
+    min-width: unset;
+    @media only screen and (max-width: 768px) {
+      width: 30%;
+    }
+    &:last-child {
+      @media only screen and (max-width: 768px) {
+        display: none;
+      }
+    }
+  }
+  .post-img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
   }
 }
 
@@ -149,6 +201,7 @@ export default {
   width: 100%;
   height: 500px;
   object-fit: cover;
+  overflow: hidden;
   @media only screen and (max-width: 768px) {
 		height: 350px;
   }

@@ -17,6 +17,7 @@
     "prismic-vue": "^2.0.1",
     "vue": "^2.6.12",
     "vue-masonry": "^0.11.8",
+    "vue-parallaxy": "^1.1.1",
     "vue-router": "^3.4.3",
     "vuex": "^3.5.1"
   },
