@@ -53,13 +53,14 @@ export default {
       font-family: "Josefin Sans",
       Arial,
       sans-serif;
+      color: rgba(0,0,0, 0.75);
       text-align: center;
       font-size: 12px;
       margin: 48px;
     }
     .credit {
       text-decoration: none;
-      color: black;
+      color: inherit;
       cursor: pointer;
     }
   }
