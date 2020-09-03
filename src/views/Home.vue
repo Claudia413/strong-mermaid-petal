@@ -24,7 +24,7 @@
               </template>
               <template v-slot:slide2>
                 <div v-for="(post, index) in selectedPreviews(slice.primary.category, 2)" :key="'post-' + index" class="post">
-                  <prismic-image :field="post.data.cover_image" class="post-img" />
+                  <router-link :to="'/blog/' + post.uid"><prismic-image :field="post.data.cover_image" class="post-img" /></router-link>
                   <h3 class="title">
                     <router-link :to="'/blog/' + post.uid">
                         {{ post.data.blog_title[0].text}}
@@ -34,8 +34,8 @@
                   <p class="publish-date">{{ readableDate(post.first_publication_date) }} </p>
                 </div>
                 <!-- Extra post to even out slider as well as show read more from this category when needed -->
-                <div class="post">
-                  <h3 v-if="previews[slice.primary.category].length > 4">Read more from {{slice.primary.category | capitalize}}</h3>
+                <div class="post extra">
+                  <h3 v-if="previews[slice.primary.category].length > 4"><router-link :to="'/category/' + slice.primary.category">Read more from {{slice.primary.category | capitalize}} </router-link><ArrowRight/></h3>
                 </div>
               </template>
             </BlogSlider>
@@ -50,12 +50,14 @@
 import Navigation from '@/components/Navigation.vue'
 import BlogSlider from '@/components/BlogSlider.vue'
 import moment from 'moment';
+import ArrowRight from "mdi-vue/ArrowRight.vue";
 
 export default {
   name: "Home",
   components: {
     Navigation,
-    BlogSlider
+    BlogSlider,
+    ArrowRight
   },
   data() {
     return {
@@ -137,17 +139,37 @@ export default {
 .most_recent_posts, .posts_per_category {
   max-width: 1200px;
   margin: auto;
+  padding: 0 80px;
+  @media only screen and (max-width: 768px) {
+		padding: 0 40px;
+  }
 }
 
 .parallax {
   width: 100%;
-  height: 50px;
+  height: 500px;
   object-fit: cover;
+  @media only screen and (max-width: 768px) {
+		height: 350px;
+  }
 }
 
 .post {
   width: 30%;
   min-width: 30%;
+  &.extra {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba($color: #000000, $alpha: 0.7);
+    h3 {
+      transition: all 0.2s ease-in-out;
+    }
+    h3:hover {
+      color: black;
+      cursor: pointer;
+    }
+  }
 }
 
 .post-img {

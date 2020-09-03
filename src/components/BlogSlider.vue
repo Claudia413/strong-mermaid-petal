@@ -2,8 +2,8 @@
 <section>
 		<div class="title-row">
 			<h2 class="title">{{title}}</h2>
-			<span v-if="showArrows" @click="incrementSlideIndex(-1)"><ChevronLeft/></span>
-			<span v-if="showArrows" @click="incrementSlideIndex(1)"><ChevronRight/></span>
+			<span v-if="showArrows" @click="incrementSlideIndex(-1)" class="arrow"><ChevronLeft/></span>
+			<span v-if="showArrows" @click="incrementSlideIndex(1)" class="arrow"><ChevronRight/></span>
 		</div>
 		<div class="slider">
 			<!-- <transition-group name="fade" mode="out-in" tag="div" class="slide-row"> -->
@@ -57,6 +57,13 @@ export default {
 	align-items: center;
 	.title {
 		margin-right: auto;
+	}
+	.arrow {
+		cursor: pointer;
+		transition: all 0.2s ease-in-out;
+		&:hover {
+			color: black;
+		}
 	}
 }
 
