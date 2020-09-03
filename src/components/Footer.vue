@@ -1,11 +1,14 @@
 <template>
   <footer>
-    <a href="https://www.instagram.com/the_bikes_and_i/" rel="noopener">
-      <Instagram :size="18" class="icon" />
-    </a>
-    <a href="https://www.youtube.com/channel/UCfWT24ZhU7KIr0CevzibZLQ" rel="noopener">
-      <YouTube :size="18" class="icon" />
-    </a>
+    <div class="icons">
+      <a href="https://www.instagram.com/the_bikes_and_i/" rel="noopener">
+        <Instagram :size="18" class="icon" />
+      </a>
+      <a href="https://www.youtube.com/channel/UCfWT24ZhU7KIr0CevzibZLQ" rel="noopener">
+        <YouTube :size="18" class="icon" />
+      </a>
+    </div>
+    <p>Made with love by <a href="https://www.claudiaengelsman.com/" rel="noopener" class="credit">Claudia Engelsman</a></p>
   </footer>
 </template>
 
@@ -26,7 +29,7 @@ export default {
   footer {
     display: flex;
     justify-content: center;
-    margin-bottom: 80px;
+    flex-direction: column;
     color: rgba(0,0,0,1);
     &:hover {
       .icon {
@@ -36,10 +39,28 @@ export default {
         }
       }
     }
+    .icons {
+      display: flex;
+      justify-content: center;
+      margin: 40px 0;
+    }
     .icon {
       margin: 4px;
       color: rgba(0, 0, 0, 1);
       transition: all 0.25s ease-in-out;
+    }
+    p {
+      font-family: "Josefin Sans",
+      Arial,
+      sans-serif;
+      text-align: center;
+      font-size: 12px;
+      margin: 48px;
+    }
+    .credit {
+      text-decoration: none;
+      color: black;
+      cursor: pointer;
     }
   }
 </style>
