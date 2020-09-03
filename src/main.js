@@ -5,6 +5,7 @@ import store from "./store";
 import PrismicVue from "@prismicio/vue";
 import linkResolver from "./link-resolver";
 import {VueMasonryPlugin} from 'vue-masonry';
+import vueHeadful from 'vue-headful';
 
 Vue.config.productionTip = false;
 
@@ -25,6 +26,8 @@ Vue.filter('capitalize', function (value) {
   value = value.toString()
   return value.charAt(0).toUpperCase() + value.slice(1)
 })
+
+Vue.component('vue-headful', vueHeadful);
 
 new Vue({
   router,
