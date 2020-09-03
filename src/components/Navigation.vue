@@ -90,7 +90,7 @@ export default {
 }
 
 .logo {
-  width: 80px;
+  width: 120px;
   height: auto;
   @media only screen and (max-width: 768px) {
     width: 72px;
