@@ -76,7 +76,7 @@ export default {
     position: sticky;
     top: 0;
     background-color: white;
-    padding: 4px 80px;
+    padding: 4px 40px;
   }
 }
 
