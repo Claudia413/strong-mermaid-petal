@@ -18,7 +18,7 @@
 				</template>
 
 				<template v-else-if="slice.slice_type === 'parallax'">
-          <Parallax :sectionClass="parallax" :parallax="true" :speedFactor="0.35" breakpoint='(min-width: 250px)' :sectionHeight="40">
+          <Parallax :parallax="true" :speedFactor="0.35" breakpoint='(min-width: 250px)' :sectionHeight="40">
 					  <prismic-image :field="slice.primary.photo" />
           </Parallax>
 				</template>
@@ -98,16 +98,11 @@ export default {
           if (slice.slice_type === 'posts_per_category') {
             that.getCategoryContent(slice.primary.category)
           } else if (slice.slice_type === 'most_recent_posts') {
-
             that.getMostRecentContent()
-            console.log('hi, still need to do something here')
-          // add function to get most recent posts
-
-
-          }
+            }
         })
       }), reason => {
-        console.log('uh-oh something went wrong! =(', reason);
+        console.log('uh-oh something went wrong retrieving content! =( , ', reason);
       };
     },
     getCategoryContent(category, pageNumber) {
