@@ -120,9 +120,10 @@ export default {
 					}
 				)
 				.then((response) => {
-          var category = response.results[0].tags[0]
-          this.previews[category]=response.results
-					// response is the response object, response.results holds the documents
+          if(response.results.length > 0) {
+            var category = response.results[0].tags[0]
+            this.previews[category]=response.results
+          }
       });
     },
     getMostRecentContent() {
@@ -137,7 +138,6 @@ export default {
 			fetch : ['blogpost.blog_title', 'blogpost.cover_image'] }
 			).then((response) => {
 				this.latestBlogs = response.results
-			// response is the response object, response.results holds the documents
 			});
     },
     readableDate(date) {
