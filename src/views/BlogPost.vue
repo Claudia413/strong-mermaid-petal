@@ -19,10 +19,6 @@
 					<prismic-image :field="slice.primary.picture" class="blog-image" />
 					<prismic-rich-text :field="slice.primary.caption" class="blog-image-caption" />
 				</template>
-				<template v-else-if="slice.slice_type === 'image_with_caption'">
-					<prismic-image :field="slice.primary.image" class="blog-image" />
-					<prismic-rich-text :field="slice.primary.image_description" class="caption" />
-				</template>
 				<template v-else-if="slice.slice_type === 'ride_stats'" class="ride-stats">
 					<span class="ride-stat">
 						<Bike class="ride-stat-icon" />
@@ -41,6 +37,18 @@
 						<a :href="slice.primary.strava_url[0].text" target="_blank" rel="noopener" class="strava-link">
 						See on Strava</a>
 					</span>
+				</template>
+				<template v-else-if="slice.slice_type === 'carousel'">
+					<cat-carousel
+					:items="slides"
+					:item-per-page="1"
+					:indicators-config="{activeColor: '#444', size: 10, color: '#eaeaea', hideIndicators: false}">
+					<template slot="item" slot-scope="{data, index}">
+						<div :key="index" class="item">
+							<prismic-image :field="data.slide_image" class="blog-image" />
+						</div>
+					 </template>
+				</cat-carousel>
 				</template>
 			</section>
 		</article>
@@ -70,7 +78,8 @@ export default {
 				seo_description: "",
 				seo_image: ""
 			},
-			slices: []
+			slices: [],
+			slides: [],
 		};
 	},
 	components: {
@@ -94,6 +103,13 @@ export default {
 				this.blog.seo_image = document.data.seo_image.url;
 				this.slices = document.data.body;
 				this.blog.prismicID = document.id;
+				var that = this
+				this.slices.forEach( function (slice) {
+					// find carousel slice if present and create data the carousel plugin will accept
+					if (slice.slice_type === 'carousel') {
+						that.slides = slice.items
+					}
+				})
 			});
 		}
 	},
@@ -142,6 +158,7 @@ article {
 	width: 100%;
 	height: auto;
 	object-fit: cover;
+	margin: 20px 0 0 0;
 }
 
 .text {
@@ -154,6 +171,7 @@ article {
 	font-size: 12px;
 	line-height: 20px;
 	padding-top: 8px;
+	margin-bottom: 20px;
 	p {
 		margin: 0;
 		padding: 0;
@@ -184,6 +202,22 @@ article {
 	}
 	@media only screen and (max-width: 768px) {
 		font-size: 13px;
+	}
+}
+
+.carousel {
+	margin-top: 40px;
+	.item {
+		width: 100%;
+		height: 500px;
+		max-height: 800px;
+		object-fit: cover;
+		@media only screen and (max-width: 768px) {
+			max-height: 320px;
+		}
+		img {
+			height: 100%;
+		}
 	}
 }
 </style>

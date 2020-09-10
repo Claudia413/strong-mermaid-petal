@@ -130,7 +130,7 @@ export default {
 
 			this.$prismic.client.query([
 			this.$prismic.Predicates.at('document.type', 'blogpost'),
-			this.$prismic.Predicates.not('document.tags', ['TEST']),
+			this.$prismic.Predicates.not('document.tags', ['test']),
 			],
 			{
 			orderings : '[document.first_publication_date desc]',

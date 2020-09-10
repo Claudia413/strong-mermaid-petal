@@ -6,6 +6,7 @@ import PrismicVue from "@prismicio/vue";
 import linkResolver from "./link-resolver";
 import {VueMasonryPlugin} from 'vue-masonry';
 import vueHeadful from 'vue-headful';
+import CatCarousel from 'vue-cat-carousel'
 
 Vue.config.productionTip = false;
 
@@ -20,6 +21,7 @@ Vue.use(PrismicVue, {
 });
 
 Vue.use(VueMasonryPlugin)
+Vue.use(CatCarousel)
 
 Vue.filter('capitalize', function (value) {
   if (!value) return ''
