@@ -24,36 +24,34 @@
 				</template>
 
         <template v-else-if="slice.slice_type === 'posts_per_category'">
-            <BlogSlider :numberOfSlides="2" :title="slice.primary.category | capitalize" :showArrows="previews[slice.primary.category].length > 2">
-              <template v-slot:slide1>
-                <div v-for="(post, index) in selectedPreviews(slice.primary.category, 1)" :key="'post-' + index" class="post">
-                    <prismic-image :field="post.data.cover_image" class="post-img" />
-                    <h3 class="title">
-                      <router-link :to="'/blog/' + post.uid">
-                          {{ post.data.blog_title[0].text}}
-                      </router-link>
-                    </h3>
-                    <prismic-rich-text :field="post.data.teaser" class="teaser"/>
-                    <p class="publish-date">{{ readableDate(post.first_publication_date) }} </p>
-                </div>
-              </template>
-              <template v-slot:slide2>
-                <div v-for="(post, index) in selectedPreviews(slice.primary.category, 2)" :key="'post-' + index" class="post">
-                  <router-link :to="'/blog/' + post.uid"><prismic-image :field="post.data.cover_image" class="post-img" /></router-link>
-                  <h3 class="title">
-                    <router-link :to="'/blog/' + post.uid">
-                        {{ post.data.blog_title[0].text}}
-                    </router-link>
-                  </h3>
-                  <prismic-rich-text :field="post.data.teaser" class="teaser"/>
-                  <p class="publish-date">{{ readableDate(post.first_publication_date) }} </p>
-                </div>
-                <!-- Extra post to even out slider as well as show read more from this category when needed -->
-                <div class="post extra">
-                  <h3 v-if="previews[slice.primary.category].length > 4"><router-link :to="'/category/' + slice.primary.category">Read more from {{slice.primary.category | capitalize}} </router-link><ArrowRight/></h3>
-                </div>
-              </template>
-            </BlogSlider>
+          <h2 class="title">{{slice.primary.category | capitalize}}</h2>
+          <cat-carousel
+					:items="previews[slice.primary.category]"
+					:item-per-page="3"
+					:indicators-config="{activeColor: '#444', size: 10, color: '#eaeaea', hideIndicators: true}">
+            <template v-if="previews[slice.primary.category].length > 3" slot="prev-navigation" slot-scope="{prev}">
+              <div class="custom-navigation" @click="prev"><ChevronLeft/></div>
+            </template>
+
+            <template slot="item" slot-scope="{data, index}">
+              <div :key="index" class="post">
+                <router-link :to="'/blog/' + data.uid">
+                  <prismic-image :field="data.data.cover_image" class="post-img" />
+                </router-link>
+                <h3 class="title">
+                  <router-link :to="'/blog/' + data.uid">
+                      {{ data.data.blog_title[0].text}}
+                  </router-link>
+                </h3>
+                <prismic-rich-text :field="data.data.teaser" class="teaser"/>
+                <p class="publish-date">{{ readableDate(data.first_publication_date) }} </p>
+              </div>
+            </template>
+
+            <template slot="next-navigation" slot-scope="{next}">
+              <div class="custom-navigation" @click="next"><ChevronRight v-if="previews[slice.primary.category].length > 3" size="24"/></div>
+            </template>
+          </cat-carousel>
 				</template>
 
     </section>
@@ -62,18 +60,18 @@
 
 <script>
 import Navigation from '@/components/Navigation.vue'
-import BlogSlider from '@/components/BlogSlider.vue'
 import moment from 'moment';
-import ArrowRight from "mdi-vue/ArrowRight.vue";
 import Parallax from 'vue-parallaxy'
+import ChevronRight from "mdi-vue/ChevronRight.vue";
+import ChevronLeft from "mdi-vue/ChevronLeft.vue";
 
 export default {
   name: "Home",
   components: {
     Navigation,
-    BlogSlider,
-    ArrowRight,
     Parallax,
+    ChevronRight,
+		ChevronLeft,
   },
   data() {
     return {
@@ -209,9 +207,16 @@ export default {
   }
 }
 
+h2 {
+  font-family: "Josefin Sans",
+     Arial,
+     sans-serif;
+     font-size: 18px;
+     line-height: 28px;
+     font-weight: 400;
+}
+
 .post {
-  width: 30%;
-  min-width: 30%;
   &.extra {
     display: flex;
     justify-content: center;
@@ -252,5 +257,9 @@ p {
     font-size: 13px;
     color: rgba($color: #000000, $alpha: 0.7)
   }
+}
+
+.custom-navigation {
+  cursor: pointer;
 }
 </style>
