@@ -243,7 +243,7 @@ h3 {
   font-weight: 400;
   margin-block-start: 0;
   margin-block-end: 0;
-  margin: 0 0 8px 0;
+  margin: 4px 0 8px 0;
   a {
     text-decoration: none;
     color: black;
