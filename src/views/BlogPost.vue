@@ -43,11 +43,17 @@
 					:items="slides"
 					:item-per-page="1"
 					:indicators-config="{activeColor: '#444', size: 10, color: '#eaeaea', hideIndicators: false}">
+					<template slot="prev-navigation" slot-scope="{prev}">
+						<div class="custom-navigation" @click="prev"><ChevronLeft/></div>
+					</template>
 					<template slot="item" slot-scope="{data, index}">
 						<div :key="index" class="item">
 							<prismic-image :field="data.slide_image" class="blog-image" />
 						</div>
 					 </template>
+					 <template slot="next-navigation" slot-scope="{next}">
+						<div class="custom-navigation" @click="next"><ChevronRight size="24"/></div>
+					</template>
 				</cat-carousel>
 				</template>
 			</section>
@@ -63,6 +69,8 @@ import Bike from "mdi-vue/Bike.vue";
 import MapMarkerDistance from "mdi-vue/MapMarkerDistance.vue";
 import FlagCheckered from "mdi-vue/FlagCheckered.vue";
 import Navigation from "@/components/Navigation.vue";
+import ChevronRight from "mdi-vue/ChevronRight.vue";
+import ChevronLeft from "mdi-vue/ChevronLeft.vue";
 
 export default {
 	name: "blogPost",
@@ -87,7 +95,9 @@ export default {
 		Bike,
 		MapMarkerDistance,
 		FlagCheckered,
-		Navigation
+		Navigation,
+		ChevronRight,
+		ChevronLeft
 	},
 	methods: {
 		getContent(uid) {
@@ -218,6 +228,11 @@ article {
 		img {
 			height: 100%;
 		}
+	}
+	.custom-navigation {
+		background-color: rgba(255, 255, 255, 0.8);
+		border-radius: 50%;
+		cursor: pointer;
 	}
 }
 </style>
