@@ -10,6 +10,7 @@
       <router-link to="/category/hacks" class="nav-link">Hacks</router-link>
       <router-link to="/category/maintenance" class="nav-link">Maintenance</router-link>
       <router-link to="/category/tools" class="nav-link">Tools</router-link>
+      <router-link to="/category/coffeeandbikes" class="nav-link">Coffee + Bikes</router-link>
     </nav>
     <div class="social">
       <a href="https://www.instagram.com/the_bikes_and_i/" rel="noopener" target="_blank">

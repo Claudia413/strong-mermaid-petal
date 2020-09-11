@@ -24,7 +24,8 @@
 				</template>
 
         <template v-else-if="slice.slice_type === 'posts_per_category'">
-          <h2 class="title">{{slice.primary.category | capitalize}}</h2>
+          <h2 v-if="slice.primary.category == 'coffeeandbikes'">Coffee + Bikes</h2>
+          <h2 v-else class="title">{{slice.primary.category | capitalize}}</h2>
           <cat-carousel
 					:items="previews[slice.primary.category]"
 					:item-per-page="3"
@@ -82,7 +83,8 @@ export default {
         experiences: [],
         hacks: [],
         maintenance: [],
-        tools: []
+        tools: [],
+        coffeeandbikes: [],
       }
     };
   },
@@ -135,7 +137,8 @@ export default {
 			pageSize : 4,
 			fetch : ['blogpost.blog_title', 'blogpost.cover_image'] }
 			).then((response) => {
-				this.latestBlogs = response.results
+        this.latestBlogs = response.results
+        console.log(this.latestBlogs)
 			});
     },
     readableDate(date) {

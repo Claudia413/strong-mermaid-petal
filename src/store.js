@@ -11,7 +11,8 @@ export default new Vuex.Store({
     blogpreviewsreviews: [],
     blogpreviewshacks: [],
     blogpreviewsmaintenance: [],
-    blogpreviewstools: []
+    blogpreviewstools: [],
+    blogpreviewscoffeeandbikes: [],
   },
   mutations: {
     TOGGLE_SHOW_MOBILE_MENU(state, payload) {
@@ -34,6 +35,9 @@ export default new Vuex.Store({
     },
     SET_BLOGPREVIEWS_TOOLS(state, payload) {
       state.blogpreviewstools = payload;
+    },
+    SET_BLOGPREVIEWS_COFFEEANDBIKES(state, payload) {
+      state.blogpreviewscoffeeandbikes = payload;
     },
   },
   actions: {

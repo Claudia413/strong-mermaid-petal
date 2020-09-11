@@ -2,7 +2,8 @@
 	<div>
 		<Navigation />
 		<main class="overview">
-            <h2>Posts in {{blog.tag | capitalize}}</h2>
+            <h2 v-if="blog.tag == 'coffeeandbikes'">Coffee + Bikes</h2>
+            <h2 v-else >Posts in {{blog.tag | capitalize}}</h2>
 
             <div v-masonry gutter="24" class="blogs">
                 <div v-masonry-tile transition-duration="0.3s" item-selector=".blog" column-width="30%" fit-width="true" v-for="(post, index) in blogpreviews" :key="'post-' + index" :blogId="post.uid" class="blog">
