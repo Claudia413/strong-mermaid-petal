@@ -138,7 +138,6 @@ export default {
 			fetch : ['blogpost.blog_title', 'blogpost.cover_image'] }
 			).then((response) => {
         this.latestBlogs = response.results
-        console.log(this.latestBlogs)
 			});
     },
     readableDate(date) {
