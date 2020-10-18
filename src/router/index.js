@@ -1,47 +1,47 @@
 import Vue from "vue";
 import store from "../store";
 import Router from "vue-router";
-// import Home from "../views/Home.vue";
-// import About from "../views/About.vue";
-// import BlogPost from "../views/BlogPost.vue";
-// import Overview from "../views/Overview.vue";
-import ComingSoon from "../views/ComingSoon.vue"
+import Home from "../views/Home.vue";
+import About from "../views/About.vue";
+import BlogPost from "../views/BlogPost.vue";
+import Overview from "../views/Overview.vue";
+// import ComingSoon from "../views/ComingSoon.vue"
 
 Vue.use(Router);
 
 const router = new Router({
   mode: "history",
   routes: [
-    {
-      path: "*",
-      name: "everything",
-      component: ComingSoon
-    },
-    // {
-    //   path: "/",
-    //   name: "Home",
-    //   component: Home
-    // },
-    // {
-    //   path: "/about",
-    //   name: "about",
-    //   component: About
-    // },
-    // {
-    //   path: "/blog/:uid",
-    //   name: "blog-post",
-    //   component: BlogPost
-    // },
-    // {
-    //   path: '/category/:tagid',
-    //   name: 'blog-category',
-    //   component: Overview,
-    // },
     // {
     //   path: "*",
     //   name: "everything",
-    //   component: Home
-    // }
+    //   component: ComingSoon
+    // },
+    {
+      path: "/",
+      name: "Home",
+      component: Home
+    },
+    {
+      path: "/about",
+      name: "about",
+      component: About
+    },
+    {
+      path: "/blog/:uid",
+      name: "blog-post",
+      component: BlogPost
+    },
+    {
+      path: '/category/:tagid',
+      name: 'blog-category',
+      component: Overview,
+    },
+    {
+      path: "*",
+      name: "everything",
+      component: Home
+    }
   ],
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
