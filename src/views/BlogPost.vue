@@ -11,7 +11,7 @@
 		<article>
 			<p class="publish-date">{{ blog.first_publication_date }}</p>
 			<h1 class="title">{{ blog.title[0].text }}</h1>
-			<section v-for="(slice, index) in slices" :key="'slice-' + index" :class="(slice.slice_type)+(slice.primary.image_on_right? ' image-on-right':'')">
+			<section v-for="(slice, index) in slices" :key="'slice-' + index" :class="(slice.slice_type)+(slice.primary.image_on_right? ' image-on-right':'')+(slice.slice_type ==='carousel'? ' full-image':'')">
 				<template v-if="slice.slice_type === 'text1'">
 					<prismic-rich-text :field="slice.primary.text" class="text" />
 				</template>
@@ -276,4 +276,6 @@ article {
 		cursor: pointer;
 	}
 }
+
+
 </style>

@@ -24,8 +24,8 @@
 				</template>
 
         <template v-else-if="slice.slice_type === 'posts_per_category'">
-          <h2 v-if="slice.primary.category == 'coffeeandbikes'">Coffee + Bikes</h2>
-          <h2 v-else class="title">{{slice.primary.category | capitalize}}</h2>
+          <h2 v-if="slice.primary.category == 'coffeeandbikes'" class="category-title" >Coffee + Bikes</h2>
+          <h2 v-else class="category-title title">{{slice.primary.category | capitalize}}</h2>
           <cat-carousel
 					:items="previews[slice.primary.category]"
 					:item-per-page="3"
@@ -209,7 +209,7 @@ export default {
   }
 }
 
-h2 {
+.category-title {
   font-family: "Josefin Sans",
      Arial,
      sans-serif;
@@ -253,8 +253,6 @@ h3 {
 }
 
 p {
-  font-size: 14px;
-  margin: 0 0 8px 0;
   &.publish-date {
     font-size: 13px;
     color: rgba($color: #000000, $alpha: 0.7)
