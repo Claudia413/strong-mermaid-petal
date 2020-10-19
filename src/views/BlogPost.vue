@@ -11,13 +11,17 @@
 		<article>
 			<p class="publish-date">{{ blog.first_publication_date }}</p>
 			<h1 class="title">{{ blog.title[0].text }}</h1>
-			<section v-for="(slice, index) in slices" :key="'slice-' + index" :class="slice.slice_type">
+			<section v-for="(slice, index) in slices" :key="'slice-' + index" :class="(slice.slice_type)+(slice.primary.image_on_right? ' image-on-right':'')+(slice.slice_type ==='carousel'? ' full-image':'')">
 				<template v-if="slice.slice_type === 'text1'">
 					<prismic-rich-text :field="slice.primary.text" class="text" />
 				</template>
 				<template v-else-if="slice.slice_type === 'picture'">
 					<prismic-image :field="slice.primary.picture" class="blog-image" />
 					<prismic-rich-text :field="slice.primary.caption" class="blog-image-caption" />
+				</template>
+				<template v-else-if="slice.slice_type === 'text_with_image'">
+					<prismic-image :field="slice.primary.image" class="blog-image-next-text" />
+					<prismic-rich-text :field="slice.primary.text" class="blog-text-next-image" />
 				</template>
 				<template v-else-if="slice.slice_type === 'ride_stats'" class="ride-stats">
 					<span class="ride-stat">
@@ -163,12 +167,16 @@ article {
 	font-size: 13px;
 	font-style: italic;
 }
-
+.picture {
+	display: flex;
+	flex-direction: column;
+	padding: 0 10%;
+}
 .blog-image {
 	width: 100%;
 	height: auto;
 	object-fit: cover;
-	margin: 20px 0 0 0;
+	margin-top: 20px;
 }
 
 .text {
@@ -215,6 +223,39 @@ article {
 	}
 }
 
+.text_with_image {
+	display: flex;
+	justify-content: space-between;
+	&.image-on-right {
+		flex-direction: row-reverse;
+		@media only screen and (max-width: 768px) {
+		flex-direction: column;
+		}
+	}
+	.blog-image-next-text {
+		margin-top: 20px;
+		max-width: 48%;
+		height: auto;
+		object-fit: cover;
+	}
+	.blog-text-next-image {
+		max-width: 48%;
+		height: auto;
+		margin-top: 20px;
+	}
+	@media only screen and (max-width: 768px) {
+		flex-direction: column;
+		.blog-image-next-text {
+			max-width: 80%;
+			margin-left: 10%;
+			margin-bottom: 20px;
+		}
+		.blog-text-next-image {
+			max-width: 100%;
+		}
+	}
+}
+
 .carousel {
 	margin-top: 40px;
 	.item {
@@ -235,4 +276,6 @@ article {
 		cursor: pointer;
 	}
 }
+
+
 </style>
