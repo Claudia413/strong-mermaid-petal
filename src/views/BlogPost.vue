@@ -163,12 +163,16 @@ article {
 	font-size: 13px;
 	font-style: italic;
 }
-
+.picture {
+	display: flex;
+	flex-direction: column;
+	padding: 0 10%;
+}
 .blog-image {
 	width: 100%;
 	height: auto;
 	object-fit: cover;
-	margin: 20px 0 0 0;
+	margin-top: 20px;
 }
 
 .text {
