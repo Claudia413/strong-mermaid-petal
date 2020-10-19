@@ -5,18 +5,12 @@ import Home from "../views/Home.vue";
 import About from "../views/About.vue";
 import BlogPost from "../views/BlogPost.vue";
 import Overview from "../views/Overview.vue";
-// import ComingSoon from "../views/ComingSoon.vue"
 
 Vue.use(Router);
 
 const router = new Router({
   mode: "history",
   routes: [
-    // {
-    //   path: "*",
-    //   name: "everything",
-    //   component: ComingSoon
-    // },
     {
       path: "/",
       name: "Home",
