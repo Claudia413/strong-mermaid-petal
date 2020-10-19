@@ -95,6 +95,8 @@ export default {
   height: auto;
   @media only screen and (max-width: 768px) {
     width: 72px;
+    // offset the menu icon width for true centering of logo
+    margin-left: 36px;
   }
 }
 
