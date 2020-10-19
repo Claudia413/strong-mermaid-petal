@@ -116,7 +116,6 @@ export default {
 				this.blog.seo_description = document.data.seo_description[0].text;
 				this.blog.seo_image = document.data.seo_image.url;
 				this.slices = document.data.body;
-				console.log(this.slices);
 				this.blog.prismicID = document.id;
 				var that = this
 				this.slices.forEach( function (slice) {
