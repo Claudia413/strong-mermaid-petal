@@ -1,68 +1,110 @@
 <template>
   <div class="home">
     <Navigation />
-    <section v-for="(slice, index) in slices" :key="'slice-' + index" :class="slice.slice_type">
-
+    <section
+      v-for="(slice, index) in slices"
+      :key="'slice-' + index"
+      :class="slice.slice_type"
+    >
       <template v-if="slice.slice_type === 'most_recent_posts'">
         <div class="recent-reel">
-          <div v-for="(post, index) in latestBlogs" :key="'post-' + index" class="post">
-              <router-link :to="'/blog/' + post.uid"><prismic-image :field="post.data.cover_image" class="post-img" /></router-link>
-              <p class="publish-date">{{ readableDate(post.first_publication_date) }} </p>
+          <div
+            v-for="(post, index) in latestBlogs"
+            :key="'post-' + index"
+            class="post"
+          >
+            <router-link :to="'/blog/' + post.uid"
+              ><prismic-image :field="post.data.cover_image" class="post-img"
+            /></router-link>
+            <p class="publish-date">
+              {{ readableDate(post.first_publication_date) }}
+            </p>
+            <h3 class="title">
+              <router-link :to="'/blog/' + post.uid">
+                {{ post.data.blog_title[0].text }}
+              </router-link>
+            </h3>
+          </div>
+        </div>
+      </template>
+
+      <template v-else-if="slice.slice_type === 'parallax'">
+        <Parallax
+          :parallax="true"
+          :speedFactor="0.35"
+          breakpoint="(min-width: 250px)"
+          :sectionHeight="40"
+        >
+          <prismic-image :field="slice.primary.photo" />
+        </Parallax>
+      </template>
+
+      <template v-else-if="slice.slice_type === 'posts_per_category'">
+        <h2
+          v-if="slice.primary.category == 'coffeeandbikes'"
+          class="category-title"
+        >
+          Coffee + Bikes
+        </h2>
+        <h2 v-else class="category-title title">
+          {{ slice.primary.category | capitalize }}
+        </h2>
+        <cat-carousel
+          :items="previews[slice.primary.category]"
+          :item-per-page="3"
+          :indicators-config="{
+            activeColor: '#444',
+            size: 10,
+            color: '#eaeaea',
+            hideIndicators: true,
+          }"
+        >
+          <template
+            v-if="previews[slice.primary.category].length > 3"
+            slot="prev-navigation"
+            slot-scope="{ prev }"
+          >
+            <div class="custom-navigation" @click="prev"><ChevronLeft /></div>
+          </template>
+
+          <template slot="item" slot-scope="{ data, index }">
+            <div :key="index" class="post">
+              <router-link :to="'/blog/' + data.uid">
+                <prismic-image
+                  :field="data.data.cover_image"
+                  class="post-img"
+                />
+              </router-link>
               <h3 class="title">
-                <router-link :to="'/blog/' + post.uid">
-                    {{ post.data.blog_title[0].text}}
+                <router-link :to="'/blog/' + data.uid">
+                  {{ data.data.blog_title[0].text }}
                 </router-link>
               </h3>
+              <prismic-rich-text :field="data.data.teaser" class="teaser" />
+              <p class="publish-date">
+                {{ readableDate(data.first_publication_date) }}
+              </p>
             </div>
-        </div>
-				</template>
+          </template>
 
-				<template v-else-if="slice.slice_type === 'parallax'">
-          <Parallax :parallax="true" :speedFactor="0.35" breakpoint='(min-width: 250px)' :sectionHeight="40">
-					  <prismic-image :field="slice.primary.photo" />
-          </Parallax>
-				</template>
-
-        <template v-else-if="slice.slice_type === 'posts_per_category'">
-          <h2 v-if="slice.primary.category == 'coffeeandbikes'" class="category-title" >Coffee + Bikes</h2>
-          <h2 v-else class="category-title title">{{slice.primary.category | capitalize}}</h2>
-          <cat-carousel
-					:items="previews[slice.primary.category]"
-					:item-per-page="3"
-					:indicators-config="{activeColor: '#444', size: 10, color: '#eaeaea', hideIndicators: true}">
-            <template v-if="previews[slice.primary.category].length > 3" slot="prev-navigation" slot-scope="{prev}">
-              <div class="custom-navigation" @click="prev"><ChevronLeft/></div>
-            </template>
-
-            <template slot="item" slot-scope="{data, index}">
-              <div :key="index" class="post">
-                <router-link :to="'/blog/' + data.uid">
-                  <prismic-image :field="data.data.cover_image" class="post-img" />
-                </router-link>
-                <h3 class="title">
-                  <router-link :to="'/blog/' + data.uid">
-                      {{ data.data.blog_title[0].text}}
-                  </router-link>
-                </h3>
-                <prismic-rich-text :field="data.data.teaser" class="teaser"/>
-                <p class="publish-date">{{ readableDate(data.first_publication_date) }} </p>
-              </div>
-            </template>
-
-            <template slot="next-navigation" slot-scope="{next}">
-              <div class="custom-navigation" @click="next"><ChevronRight v-if="previews[slice.primary.category].length > 3" size="24"/></div>
-            </template>
-          </cat-carousel>
-				</template>
-
+          <template slot="next-navigation" slot-scope="{ next }">
+            <div class="custom-navigation" @click="next">
+              <ChevronRight
+                v-if="previews[slice.primary.category].length > 3"
+                size="24"
+              />
+            </div>
+          </template>
+        </cat-carousel>
+      </template>
     </section>
   </div>
 </template>
 
 <script>
-import Navigation from '@/components/Navigation.vue'
-import moment from 'moment';
-import Parallax from 'vue-parallaxy'
+import Navigation from "@/components/Navigation.vue";
+import moment from "moment";
+import Parallax from "vue-parallaxy";
 import ChevronRight from "mdi-vue/ChevronRight.vue";
 import ChevronLeft from "mdi-vue/ChevronLeft.vue";
 
@@ -72,7 +114,7 @@ export default {
     Navigation,
     Parallax,
     ChevronRight,
-		ChevronLeft,
+    ChevronLeft,
   },
   data() {
     return {
@@ -85,89 +127,101 @@ export default {
         maintenance: [],
         tools: [],
         coffeeandbikes: [],
-      }
+      },
     };
   },
   methods: {
     getContent() {
-      this.$prismic.client.getSingle("homepage").then(document => {
+      this.$prismic.client.getSingle("homepage").then((document) => {
         this.slices = document.data.body;
-        var that = this
-        this.slices.forEach( function (slice) {
+        var that = this;
+        this.slices.forEach(function (slice) {
           // for each category slice we'll need to get the content per category
-          if (slice.slice_type === 'posts_per_category') {
-            that.getCategoryContent(slice.primary.category)
-          } else if (slice.slice_type === 'most_recent_posts') {
-            that.getMostRecentContent()
-            }
-        })
-      }), reason => {
-        console.log('uh-oh something went wrong retrieving content! =( , ', reason);
-      };
+          if (slice.slice_type === "posts_per_category") {
+            that.getCategoryContent(slice.primary.category);
+          } else if (slice.slice_type === "most_recent_posts") {
+            that.getMostRecentContent();
+          }
+        });
+      }),
+        (reason) => {
+          console.log(
+            "uh-oh something went wrong retrieving content! =( , ",
+            reason
+          );
+        };
     },
     getCategoryContent(category, pageNumber) {
       this.$prismic.client
-				.query(
-					[
-						this.$prismic.Predicates.at("document.type", "blogpost"),
-						this.$prismic.Predicates.at("document.tags", [category]),
-					],
-					{
-						orderings: "[document.first_publication_date desc]",
-						pageSize: 5,
-						page: pageNumber,
-						fetch: ["blogpost.blog_title", "blogpost.teaser", "blogpost.cover_image"],
-					}
-				)
-				.then((response) => {
-          if(response.results.length > 0) {
-            var category = response.results[0].tags[0]
-            this.previews[category]=response.results
+        .query(
+          [
+            this.$prismic.Predicates.at("document.type", "blogpost"),
+            this.$prismic.Predicates.at("document.tags", [category]),
+          ],
+          {
+            orderings: "[document.first_publication_date desc]",
+            pageSize: 5,
+            page: pageNumber,
+            fetch: [
+              "blogpost.blog_title",
+              "blogpost.teaser",
+              "blogpost.cover_image",
+            ],
           }
-      });
+        )
+        .then((response) => {
+          if (response.results.length > 0) {
+            var category = response.results[0].tags[0];
+            this.previews[category] = response.results;
+          }
+        });
     },
     getMostRecentContent() {
-
-			this.$prismic.client.query([
-			this.$prismic.Predicates.at('document.type', 'blogpost'),
-			this.$prismic.Predicates.not('document.tags', ['test']),
-			],
-			{
-			orderings : '[document.first_publication_date desc]',
-			pageSize : 4,
-			fetch : ['blogpost.blog_title', 'blogpost.cover_image'] }
-			).then((response) => {
-        this.latestBlogs = response.results
-			});
+      this.$prismic.client
+        .query(
+          [
+            this.$prismic.Predicates.at("document.type", "blogpost"),
+            this.$prismic.Predicates.not("document.tags", ["test"]),
+          ],
+          {
+            orderings: "[document.first_publication_date desc]",
+            pageSize: 4,
+            fetch: ["blogpost.blog_title", "blogpost.cover_image"],
+          }
+        )
+        .then((response) => {
+          this.latestBlogs = response.results;
+        });
     },
     readableDate(date) {
-          return moment(date).format("MMMM Do, YYYY")
+      return moment(date).format("MMMM Do, YYYY");
     },
     selectedPreviews(category, sideToShow) {
-      if(sideToShow === 1) {
+      if (sideToShow === 1) {
         return this.previews[category].filter(function (post, index) {
-          return index < 3
-        })
+          return index < 3;
+        });
       } else {
         return this.previews[category].filter(function (post, index) {
-          return index >= 3
-        })
+          return index >= 3;
+        });
       }
     },
   },
   created() {
     this.getContent();
-  }
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-.most_recent_posts, .posts_per_category {
+.most_recent_posts,
+.posts_per_category {
   max-width: 1200px;
   margin: 40px auto;
   padding: 0 80px;
   @media only screen and (max-width: 768px) {
-		padding: 0 40px;
+    padding: 0 40px;
   }
 }
 
@@ -205,17 +259,15 @@ export default {
   object-fit: cover;
   overflow: hidden;
   @media only screen and (max-width: 768px) {
-		height: 350px;
+    height: 350px;
   }
 }
 
 .category-title {
-  font-family: "Josefin Sans",
-     Arial,
-     sans-serif;
-     font-size: 18px;
-     line-height: 28px;
-     font-weight: 400;
+  font-family: "Josefin Sans", Arial, sans-serif;
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 400;
 }
 
 .post {
@@ -235,9 +287,9 @@ export default {
 }
 
 .post-img {
- width: 100%;
- max-height: 240px;
- object-fit: cover;
+  width: 100%;
+  max-height: 240px;
+  object-fit: cover;
 }
 
 h3 {
@@ -255,7 +307,7 @@ h3 {
 p {
   &.publish-date {
     font-size: 13px;
-    color: rgba($color: #000000, $alpha: 0.7)
+    color: rgba($color: #000000, $alpha: 0.7);
   }
 }
 

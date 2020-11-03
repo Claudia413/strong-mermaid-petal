@@ -1,20 +1,20 @@
 <template>
-<div>
-  <Navigation/>
-  <main class="about">
-    <div class="content">
-      <section class="text">
-        <h1>{{ fields.title }}</h1>
-        <prismic-rich-text :field="fields.richContent" />
-      </section>
-      <prismic-image :field="fields.photo" class="img" />
-    </div>
-  </main>
-</div>
+  <div>
+    <Navigation />
+    <main class="about">
+      <div class="content">
+        <section class="text">
+          <h1>{{ fields.title }}</h1>
+          <prismic-rich-text :field="fields.richContent" />
+        </section>
+        <prismic-image :field="fields.photo" class="img" />
+      </div>
+    </main>
+  </div>
 </template>
 
 <script>
-import Navigation from '@/components/Navigation.vue';
+import Navigation from "@/components/Navigation.vue";
 
 export default {
   data() {
@@ -22,25 +22,25 @@ export default {
       fields: {
         title: "",
         richContent: [],
-        photo: {}
-      }
+        photo: {},
+      },
     };
   },
   components: {
-    Navigation
+    Navigation,
   },
   methods: {
     getContent() {
-      this.$prismic.client.getSingle("about").then(document => {
+      this.$prismic.client.getSingle("about").then((document) => {
         this.fields.title = document.data.title[0].text;
         this.fields.richContent = document.data.content;
         this.fields.photo = document.data.photo;
       });
-    }
+    },
   },
   created() {
     this.getContent();
-  }
+  },
 };
 </script>
 
