@@ -4,9 +4,9 @@ import router from "./router";
 import store from "./store";
 import PrismicVue from "@prismicio/vue";
 import linkResolver from "./link-resolver";
-import {VueMasonryPlugin} from 'vue-masonry';
-import vueHeadful from 'vue-headful';
-import CatCarousel from 'vue-cat-carousel'
+import { VueMasonryPlugin } from "vue-masonry";
+import vueHeadful from "vue-headful";
+import CatCarousel from "vue-cat-carousel";
 
 Vue.config.productionTip = false;
 
@@ -16,23 +16,23 @@ Vue.use(PrismicVue, {
   endpoint: window.prismic.endpoint,
   linkResolver,
   apiOptions: {
-    accessToken
-  }
+    accessToken,
+  },
 });
 
-Vue.use(VueMasonryPlugin)
-Vue.use(CatCarousel)
+Vue.use(VueMasonryPlugin);
+Vue.use(CatCarousel);
 
-Vue.filter('capitalize', function (value) {
-  if (!value) return ''
-  value = value.toString()
-  return value.charAt(0).toUpperCase() + value.slice(1)
-})
+Vue.filter("capitalize", function (value) {
+  if (!value) return "";
+  value = value.toString();
+  return value.charAt(0).toUpperCase() + value.slice(1);
+});
 
-Vue.component('vue-headful', vueHeadful);
+Vue.component("vue-headful", vueHeadful);
 
 new Vue({
   router,
   store,
-  render: h => h(App)
+  render: (h) => h(App),
 }).$mount("#app");

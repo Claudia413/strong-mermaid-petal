@@ -16,7 +16,7 @@ export default new Vuex.Store({
   },
   mutations: {
     TOGGLE_SHOW_MOBILE_MENU(state, payload) {
-      state.showMobileMenu = payload
+      state.showMobileMenu = payload;
     },
     SET_BLOGPREVIEWSLATEST(state, payload) {
       state.blogpreviewslatest = payload;
@@ -42,21 +42,20 @@ export default new Vuex.Store({
   },
   actions: {
     setBlogPreviewsFromPrismic({ commit }, results) {
-      if (typeof results[0] !== 'undefined'){
-        var tag=results[0].tags[0].toUpperCase();
+      if (typeof results[0] !== "undefined") {
+        var tag = results[0].tags[0].toUpperCase();
         commit("SET_BLOGPREVIEWS_" + tag, results);
       } else {
-        console.log('there are no results for this category')
+        console.log("there are no results for this category");
       }
     },
-    toggleShowMobileMenu({commit}, setting) {
+    toggleShowMobileMenu({ commit }, setting) {
       if (setting) {
         commit("TOGGLE_SHOW_MOBILE_MENU", setting);
       } else {
         commit("TOGGLE_SHOW_MOBILE_MENU", !this.state.showMobileMenu);
       }
-
-    }
+    },
   },
-  getters: {}
+  getters: {},
 });

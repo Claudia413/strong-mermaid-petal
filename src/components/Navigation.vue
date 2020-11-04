@@ -3,24 +3,43 @@
     <router-link to="/" class="logo-section">
       <img src="../assets/Logo3.png" alt="the Bikes & I" class="logo" />
     </router-link>
-    <nav class="nav-links" :class="showMenu? 'show' : '' ">
+    <nav class="nav-links" :class="showMenu ? 'show' : ''">
       <router-link to="/about" class="nav-link">About</router-link>
-      <router-link to="/category/experiences" class="nav-link">Experiences</router-link>
+      <router-link to="/category/experiences" class="nav-link"
+        >Experiences</router-link
+      >
       <router-link to="/category/reviews" class="nav-link">Reviews</router-link>
       <router-link to="/category/hacks" class="nav-link">Hacks</router-link>
-      <router-link to="/category/maintenance" class="nav-link">Maintenance</router-link>
+      <router-link to="/category/maintenance" class="nav-link"
+        >Maintenance</router-link
+      >
       <router-link to="/category/tools" class="nav-link">Tools</router-link>
-      <router-link to="/category/coffeeandbikes" class="nav-link">Coffee + Bikes</router-link>
+      <router-link to="/category/coffeeandbikes" class="nav-link"
+        >Coffee + Bikes</router-link
+      >
     </nav>
     <div class="social">
-      <a href="https://www.instagram.com/the_bikes_and_i/" rel="noopener" target="_blank">
+      <a
+        href="https://www.instagram.com/the_bikes_and_i/"
+        rel="noopener"
+        target="_blank"
+      >
         <Instagram :size="18" class="icon" />
       </a>
-      <a href="https://www.youtube.com/channel/UCfWT24ZhU7KIr0CevzibZLQ" rel="noopener" target="_blank">
+      <a
+        href="https://www.youtube.com/channel/UCfWT24ZhU7KIr0CevzibZLQ"
+        rel="noopener"
+        target="_blank"
+      >
         <YouTube :size="18" class="icon" />
       </a>
     </div>
-    <div class="nav-icon" @click="toggleShowMobileMenu()" :class="showMenu? 'open' : ''" title="toggle mobile menu">
+    <div
+      class="nav-icon"
+      @click="toggleShowMobileMenu()"
+      :class="showMenu ? 'open' : ''"
+      title="toggle mobile menu"
+    >
       <span></span>
       <span></span>
       <span></span>
@@ -32,29 +51,26 @@
 <script>
 import Instagram from "mdi-vue/Instagram.vue";
 import YouTube from "mdi-vue/Youtube.vue";
-import { mapActions } from 'vuex'
+import { mapActions } from "vuex";
 
 export default {
   name: "Navigation",
   data() {
-    return {
-
-    };
+    return {};
   },
   components: {
-      Instagram,
-      YouTube
-    },
+    Instagram,
+    YouTube,
+  },
   methods: {
-     ...mapActions([
-      'toggleShowMobileMenu'])
+    ...mapActions(["toggleShowMobileMenu"]),
   },
   computed: {
-    showMenu () {
+    showMenu() {
       return this.$store.state.showMobileMenu;
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style scoped lang="scss">
@@ -72,8 +88,9 @@ export default {
   @media only screen and (max-width: 768px) {
     grid-template-columns: 3fr auto;
     grid-template-rows: auto auto;
-    grid-template-areas: "logo toggle"
-                         "links links";
+    grid-template-areas:
+      "logo toggle"
+      "links links";
     position: sticky;
     top: 0;
     background-color: white;
@@ -102,9 +119,7 @@ export default {
 
 nav {
   grid-area: links;
-  font-family: "Josefin Sans",
-     Arial,
-     sans-serif;
+  font-family: "Josefin Sans", Arial, sans-serif;
   font-size: 14px;
   text-transform: uppercase;
   display: flex;
@@ -113,14 +128,14 @@ nav {
   a {
     margin: 6px 12px;
     text-decoration: none;
-    color:rgba(0, 0, 0, 1);
+    color: rgba(0, 0, 0, 1);
     -webkit-transition: all 0.3s ease-out;
     -moz-transition: all 0.3s ease-out;
     -o-transition: all 0.3s ease-out;
     transition: all 0.3s ease-out;
   }
   a:hover {
-    color:rgba(0, 0, 0, 0.35);
+    color: rgba(0, 0, 0, 0.35);
   }
   @media only screen and (max-width: 768px) {
     flex-direction: column;
@@ -138,22 +153,22 @@ nav {
       left: 0;
     }
     a {
-    margin: 12px;
+      margin: 12px;
     }
   }
 }
 
 .social {
   grid-area: social;
-  color: rgba(0,0,0,1);
+  color: rgba(0, 0, 0, 1);
   margin-left: 24px;
   // Padding bottom to get the svgs to vertically align with the rest of navbar
   padding-bottom: 5px;
   &:hover {
     .icon {
-      color: rgba(0,0,0, 0.35);
-      &:hover{
-        color: rgba(0,0,0,1);
+      color: rgba(0, 0, 0, 0.35);
+      &:hover {
+        color: rgba(0, 0, 0, 1);
       }
     }
   }
@@ -167,11 +182,11 @@ nav {
     transition: all 0.3s ease-in-out;
   }
   @media only screen and (max-width: 768px) {
-		display: none;
-	}
+    display: none;
+  }
 }
 
-.nav-icon{
+.nav-icon {
   grid-area: toggle;
   width: 36px;
   height: 18px;
@@ -180,15 +195,15 @@ nav {
   -moz-transform: rotate(0deg);
   -o-transform: rotate(0deg);
   transform: rotate(0deg);
-  -webkit-transition: .5s ease-in-out;
-  -moz-transition: .5s ease-in-out;
-  -o-transition: .5s ease-in-out;
-  transition: .5s ease-in-out;
+  -webkit-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  -o-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
   cursor: pointer;
   display: none;
-   @media only screen and (max-width: 768px) {
-		display: block;
-	}
+  @media only screen and (max-width: 768px) {
+    display: block;
+  }
 }
 
 .nav-icon span {
@@ -204,17 +219,18 @@ nav {
   -moz-transform: rotate(0deg);
   -o-transform: rotate(0deg);
   transform: rotate(0deg);
-  -webkit-transition: .25s ease-in-out;
-  -moz-transition: .25s ease-in-out;
-  -o-transition: .25s ease-in-out;
-  transition: .25s ease-in-out;
+  -webkit-transition: 0.25s ease-in-out;
+  -moz-transition: 0.25s ease-in-out;
+  -o-transition: 0.25s ease-in-out;
+  transition: 0.25s ease-in-out;
 }
 
 .nav-icon span:nth-child(1) {
   top: 0px;
 }
 
-.nav-icon span:nth-child(2),.nav-icon span:nth-child(3) {
+.nav-icon span:nth-child(2),
+.nav-icon span:nth-child(3) {
   top: 9px;
 }
 

@@ -14,28 +14,28 @@ const router = new Router({
     {
       path: "/",
       name: "Home",
-      component: Home
+      component: Home,
     },
     {
       path: "/about",
       name: "about",
-      component: About
+      component: About,
     },
     {
       path: "/blog/:uid",
       name: "blog-post",
-      component: BlogPost
+      component: BlogPost,
     },
     {
-      path: '/category/:tagid',
-      name: 'blog-category',
+      path: "/category/:tagid",
+      name: "blog-category",
       component: Overview,
     },
     {
       path: "*",
       name: "everything",
-      component: Home
-    }
+      component: Home,
+    },
   ],
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
@@ -43,15 +43,15 @@ const router = new Router({
     } else {
       return {
         x: 0,
-        y: 0
+        y: 0,
       };
     }
-  }
+  },
 });
 
 router.beforeEach((to, from, next) => {
   store.state.showMobileMenu = false;
-  next()
-})
+  next();
+});
 
-export default router
+export default router;

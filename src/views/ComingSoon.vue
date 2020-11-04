@@ -1,16 +1,13 @@
 <template>
   <main class="comingsoon">
     <div class="content">
-     <img src="../assets/Logo3.png" alt="the Bikes & I" class="logo" />
-     <h1>Coming back soon...</h1>
+      <img src="../assets/Logo3.png" alt="the Bikes & I" class="logo" />
+      <h1>Coming back soon...</h1>
     </div>
   </main>
 </template>
 
-<script>
-
-
-</script>
+<script></script>
 
 <style lang="scss" scoped>
 .comingsoon {
@@ -20,8 +17,8 @@
   background-color: #fcfcfc;
   margin: 64px 0;
   @media only screen and (max-width: 768px) {
-		margin: 40px 0;
-	}
+    margin: 40px 0;
+  }
 }
 .content {
   max-width: 1200px;
@@ -37,6 +34,4 @@
     margin: 64px;
   }
 }
-
-
 </style>
