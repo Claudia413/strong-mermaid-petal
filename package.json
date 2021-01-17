@@ -18,7 +18,7 @@
     "vue": "^2.6.12",
     "vue-cat-carousel": "^0.9.3-5",
     "vue-headful": "^2.1.0",
-    "vue-masonry": "^0.11.8",
+    "vue-masonry": "^0.12.0",
     "vue-parallaxy": "^1.1.1",
     "vue-router": "^3.4.9",
     "vuex": "^3.6.0"
