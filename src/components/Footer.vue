@@ -5,7 +5,7 @@
         <mdicon name="instagram" size="18" class="icon" />
       </a>
       <a href="https://www.youtube.com/channel/UCfWT24ZhU7KIr0CevzibZLQ" rel="noopener">
-        <mdicon name="youTube" size="18" class="icon" />
+        <mdicon name="youtube" size="18" class="icon" />
       </a>
     </div>
     <p>

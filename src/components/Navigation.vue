@@ -17,7 +17,7 @@
         <mdicon name="instagram" size="18" class="icon" />
       </a>
       <a href="https://www.youtube.com/channel/UCfWT24ZhU7KIr0CevzibZLQ" rel="noopener" target="_blank">
-        <mdicon name="youTube" size="18" class="icon" />
+        <mdicon name="youtube" size="18" class="icon" />
       </a>
     </div>
     <div class="nav-icon" @click="toggleShowMobileMenu()" :class="showMenu ? 'open' : ''" title="toggle mobile menu">
