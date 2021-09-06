@@ -7,6 +7,8 @@ import linkResolver from "./link-resolver";
 import { VueMasonryPlugin } from "vue-masonry";
 import vueHeadful from "vue-headful";
 import CatCarousel from "vue-cat-carousel";
+import mdiVue from "mdi-vue/v2";
+import * as mdijs from "@mdi/js";
 
 Vue.config.productionTip = false;
 
@@ -22,6 +24,9 @@ Vue.use(PrismicVue, {
 
 Vue.use(VueMasonryPlugin);
 Vue.use(CatCarousel);
+Vue.use(mdiVue, {
+  icons: mdijs,
+});
 
 Vue.filter("capitalize", function (value) {
   if (!value) return "";
