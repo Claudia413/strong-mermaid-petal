@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navigation />
+    <NavigationComponent />
     <main class="about">
       <div class="content">
         <section class="text">
@@ -14,9 +14,10 @@
 </template>
 
 <script>
-import Navigation from "@/components/Navigation.vue";
+import NavigationComponent from "@/components/Navigation.vue";
 
 export default {
+  name: "AboutPage",
   data() {
     return {
       fields: {
@@ -27,7 +28,7 @@ export default {
     };
   },
   components: {
-    Navigation,
+    NavigationComponent,
   },
   methods: {
     getContent() {
