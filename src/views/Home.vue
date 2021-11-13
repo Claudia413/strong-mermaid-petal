@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <Navigation />
+    <NavigationComponent />
     <section
       v-for="(slice, index) in slices"
       :key="'slice-' + index"
@@ -105,14 +105,14 @@
 </template>
 
 <script>
-import Navigation from "@/components/Navigation.vue";
+import NavigationComponent from "@/components/Navigation.vue";
 import moment from "moment";
 import Parallax from "vue-parallaxy";
 
 export default {
-  name: "Home",
+  name: "HomePage",
   components: {
-    Navigation,
+    NavigationComponent,
     Parallax,
   },
   data() {

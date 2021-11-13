@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navigation />
+    <NavigationComponent />
     <main class="overview">
       <h2 v-if="blog.tag == 'coffeeandbikes'">Coffee + Bikes</h2>
       <h2 v-else>Posts in {{ blog.tag | capitalize }}</h2>
@@ -43,12 +43,12 @@
 
 <script>
 // import moment from "moment";
-import Navigation from "@/components/Navigation.vue";
+import NavigationComponent from "@/components/Navigation.vue";
 import { mapState } from "vuex";
 import moment from "moment";
 
 export default {
-  name: "Overview",
+  name: "OverviewPage",
   data() {
     return {
       pageNumber: 1,
@@ -59,7 +59,7 @@ export default {
     };
   },
   components: {
-    Navigation,
+    NavigationComponent,
   },
   methods: {
     getContent(category, pageNumber) {

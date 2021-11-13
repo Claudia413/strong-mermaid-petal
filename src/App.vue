@@ -1,17 +1,17 @@
 <template>
   <div id="app">
     <router-view />
-    <Footer />
+    <FooterComponent />
   </div>
 </template>
 
 <script>
 import "./assets/main.scss";
-import Footer from "./components/Footer.vue";
+import FooterComponent from "./components/Footer.vue";
 
 export default {
   components: {
-    Footer,
+    FooterComponent,
   },
 };
 </script>

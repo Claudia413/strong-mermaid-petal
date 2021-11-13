@@ -52,7 +52,7 @@
 import { mapActions } from "vuex";
 
 export default {
-  name: "Navigation",
+  name: "NavigationComponent",
   data() {
     return {};
   },
